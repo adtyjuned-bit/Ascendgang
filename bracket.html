@@ -1,392 +1,123 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tournament Bracket - ASCEND</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
+<script>
+  // =========================================================================
+  // 📍 BAGIAN PENGATURAN BRACKET (EDIT DI SINI)
+  // =========================================================================
+  // • Jika mau 8 TIM SAJA  -> HAPUS Babak 1 (Round of 16)
+  // • Jika mau 16 TIM     -> Pakai semua babak dari Babak 1
+  // • `winner`: Set ke 1 (Tim Atas Menang), 2 (Tim Bawah Menang), atau 0 (Belum Main)
+  // =========================================================================
+
+  const bracketData = [
+    
+    // -----------------------------------------------------------------------
+    // 🔹 BABAK 1: ROUND OF 16 (Hapus bagian { ... } ini kalau cuma 8 tim!)
+    // -----------------------------------------------------------------------
+    {
+      roundName: "Round of 16",
+      matches: [
+        { team1: "Team A", score1: 2, team2: "Team B", score2: 0, winner: 1, lineup: "gambar/lineup1.jpg" }, // 👈 EDIT NAMA & FOTO
+        { team1: "Team C", score1: 1, team2: "Team D", score2: 2, winner: 2, lineup: "gambar/lineup2.jpg" },
+        { team1: "Team E", score1: 2, team2: "Team F", score2: 1, winner: 1, lineup: "gambar/lineup3.jpg" },
+        { team1: "Team G", score1: 0, team2: "Team H", score2: 2, winner: 2, lineup: "gambar/lineup4.jpg" },
+        { team1: "Team I", score1: 2, team2: "Team J", score2: 0, winner: 1, lineup: "gambar/lineup5.jpg" },
+        { team1: "Team K", score1: 1, team2: "Team L", score2: 2, winner: 2, lineup: "gambar/lineup6.jpg" },
+        { team1: "Team M", score1: 2, team2: "Team N", score2: 0, winner: 1, lineup: "gambar/lineup7.jpg" },
+        { team1: "Team O", score1: 0, team2: "Team P", score2: 2, winner: 2, lineup: "gambar/lineup8.jpg" },
+      ]
+    },
+
+    // -----------------------------------------------------------------------
+    // 🔹 BABAK 2: QUARTER FINAL (8 Besar)
+    // -----------------------------------------------------------------------
+    {
+      roundName: "Quarter Final",
+      matches: [
+        { team1: "Team A", score1: 2, team2: "Team D", score2: 1, winner: 1, lineup: "gambar/lineup-qf1.jpg" }, // 👈 EDIT NAMA & FOTO
+        { team1: "Team E", score1: 0, team2: "Team H", score2: 2, winner: 2, lineup: "gambar/lineup-qf2.jpg" },
+        { team1: "Team I", score1: 2, team2: "Team L", score2: 0, winner: 1, lineup: "gambar/lineup-qf3.jpg" },
+        { team1: "Team M", score1: 1, team2: "Team P", score2: 2, winner: 2, lineup: "gambar/lineup-qf4.jpg" },
+      ]
+    },
+
+    // -----------------------------------------------------------------------
+    // 🔹 BABAK 3: SEMI FINAL (4 Besar)
+    // -----------------------------------------------------------------------
+    {
+      roundName: "Semi Final",
+      matches: [
+        { team1: "Team A", score1: 2, team2: "Team H", score2: 0, winner: 1, lineup: "gambar/lineup-sf1.jpg" }, // 👈 EDIT NAMA & FOTO
+        { team1: "Team I", score1: 1, team2: "Team P", score2: 2, winner: 2, lineup: "gambar/lineup-sf2.jpg" },
+      ]
+    },
+
+    // -----------------------------------------------------------------------
+    // 🏆 BABAK 4: GRAND FINAL
+    // -----------------------------------------------------------------------
+    {
+      roundName: "Grand Final",
+      matches: [
+        { team1: "Team A", score1: "-", team2: "Team P", score2: "-", winner: 0, lineup: "gambar/lineup-gf.jpg" } // 👈 EDIT NAMA & FOTO
+      ]
     }
 
-    body {
-      background: #08090d;
-      background: radial-gradient(circle at top, #101424 0%, #08090d 100%);
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 40px 15px;
-    }
+  ];
 
-    /* Header Title */
-    .title-container {
-      text-align: center;
-      margin-bottom: 40px;
-    }
+  // =========================================================================
+  // ⚠️ SISTEM OTOMATIS (JANGAN DIUBAH BAGIAN BAWAH INI)
+  // =========================================================================
+  function renderBracket() {
+    const container = document.getElementById('bracketContainer');
+    container.innerHTML = '';
 
-    .title-container h1 {
-      font-size: 2.2rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: #00d2ff;
-      text-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
-    }
+    bracketData.forEach(round => {
+      const roundDiv = document.createElement('div');
+      roundDiv.className = 'round';
 
-    .title-container p {
-      color: #8a94a6;
-      font-size: 0.9rem;
-      margin-top: 6px;
-      letter-spacing: 1px;
-    }
+      const titleDiv = document.createElement('div');
+      titleDiv.className = 'round-title';
+      titleDiv.innerText = round.roundName;
+      roundDiv.appendChild(titleDiv);
 
-    /* Bracket Container */
-    .bracket-wrapper {
-      width: 100%;
-      max-width: 1100px;
-      overflow-x: auto;
-      padding: 20px 10px;
-    }
+      round.matches.forEach(match => {
+        const matchDiv = document.createElement('div');
+        matchDiv.className = 'match';
+        matchDiv.onclick = () => openModal(match.lineup);
 
-    .bracket-container {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      min-width: 700px;
-    }
+        const team1Class = match.winner === 1 ? 'team winner' : 'team';
+        const team2Class = match.winner === 2 ? 'team winner' : 'team';
 
-    .round {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-around;
-      flex: 1;
-    }
-
-    .round-title {
-      text-align: center;
-      font-size: 1.1rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #00d2ff;
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid rgba(0, 210, 255, 0.3);
-    }
-
-    /* Match Box */
-    .match {
-      background: rgba(22, 27, 41, 0.8);
-      border: 1px solid rgba(0, 210, 255, 0.2);
-      border-radius: 12px;
-      padding: 14px 18px;
-      margin: 15px 0;
-      cursor: pointer;
-      backdrop-filter: blur(8px);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      position: relative;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
-
-    .match:hover {
-      border-color: #00d2ff;
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
-    }
-
-    .team {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 0;
-      font-weight: 700;
-      font-size: 14px;
-      color: #d1d5db;
-    }
-
-    .team.winner {
-      color: #00ff87;
-      text-shadow: 0 0 8px rgba(0, 255, 135, 0.4);
-    }
-
-    .score {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      color: #9ca3af;
-    }
-
-    .team.winner .score {
-      background: rgba(0, 255, 135, 0.15);
-      color: #00ff87;
-    }
-
-    .match-hint {
-      display: block;
-      font-size: 10px;
-      text-align: center;
-      color: #00d2ff;
-      margin-top: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      opacity: 0.7;
-    }
-
-    .match:hover .match-hint {
-      opacity: 1;
-    }
-
-    /* Champion / Grand Final Special Border */
-    .match.grand-final {
-      border-color: rgba(255, 183, 3, 0.5);
-      box-shadow: 0 0 15px rgba(255, 183, 3, 0.15);
-    }
-
-    .match.grand-final:hover {
-      border-color: #ffb703;
-      box-shadow: 0 0 25px rgba(255, 183, 3, 0.5);
-    }
-
-    .match.grand-final .round-title {
-      color: #ffb703;
-    }
-
-    /* Back Button */
-    .btn-back {
-      margin-top: 40px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #8a94a6;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 10px 20px;
-      border-radius: 30px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      transition: all 0.3s;
-    }
-
-    .btn-back:hover {
-      color: #ffffff;
-      border-color: #00d2ff;
-      background: rgba(0, 210, 255, 0.1);
-      box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
-    }
-
-    /* Modal Popup Styling */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 9999;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.88);
-      backdrop-filter: blur(6px);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      position: relative;
-      background: #121624;
-      border: 1px solid rgba(0, 210, 255, 0.4);
-      padding: 20px;
-      border-radius: 16px;
-      max-width: 90%;
-      max-height: 85vh;
-      box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .modal-content img {
-      max-width: 100%;
-      max-height: 72vh;
-      border-radius: 10px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .close-btn {
-      position: absolute;
-      top: -12px;
-      right: -12px;
-      background: #ff4757;
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 30px;
-      font-weight: bold;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .close-btn:hover {
-      background: #ff6b81;
-      transform: scale(1.1);
-    }
-  </style>
-</head>
-<body>
-
-  <div class="title-container">
-    <h1>TOURNAMENT BRACKET</h1>
-    <p>Klik pada match untuk melihat Lineup Team</p>
-  </div>
-
-  <div class="bracket-wrapper">
-    <div class="bracket-container">
-      
-      <!-- Quarter Final -->
-      <div class="round">
-        <div class="round-title">Quarter Final</div>
-        
-        <div class="match" onclick="openModal('gambar/lineup-match1.jpg')">
-          <div class="team winner">
-            <span>Team A</span>
-            <span class="score">0</span>
+        matchDiv.innerHTML = `
+          <div class="${team1Class}">
+            <span>${match.team1}</span>
+            <span class="score">${match.score1}</span>
           </div>
-          <div class="team">
-            <span>Team B</span>
-            <span class="score">0</span>
+          <div class="${team2Class}">
+            <span>${match.team2}</span>
+            <span class="score">${match.score2}</span>
           </div>
           <span class="match-hint">🔍 Klik untuk Lineup</span>
-        </div>
+        `;
 
-        <div class="match" onclick="openModal('gambar/lineup-match2.jpg')">
-          <div class="team winner">
-            <span>Team A</span>
-            <span class="score">0</span>
-          </div>
-          <div class="team">
-            <span>Team B</span>
-            <span class="score">0</span>
-          </div>
-          <span class="match-hint">🔍 Klik untuk Lineup</span>
-        </div>
-      </div>
+        roundDiv.appendChild(matchDiv);
+      });
 
-      <div class="match" onclick="openModal('gambar/lineup-match2.jpg')">
-          <div class="team winner">
-            <span>Team A</span>
-            <span class="score">0</span>
-          </div>
-          <div class="team">
-            <span>Team B</span>
-            <span class="score">0</span>
-          </div>
-          <span class="match-hint">🔍 Klik untuk Lineup</span>
-        </div>
-    </div>
+      container.appendChild(roundDiv);
+    });
+  }
 
-    <div class="match" onclick="openModal('gambar/lineup-match2.jpg')">
-          <div class="team winner">
-            <span>Team A</span>
-            <span class="score">0</span>
-          </div>
-          <div class="team">
-            <span>Team B</span>
-            <span class="score">0</span>
-          </div>
-          <span class="match-hint">🔍 Klik untuk Lineup</span>
-        </div>
-      </div>
+  function openModal(imageSrc) {
+    document.getElementById('lineupImg').src = imageSrc;
+    document.getElementById('lineupModal').style.display = 'flex';
+  }
 
-      <!-- Semi Final -->
-      <div class="round">
-        <div class="round-title">Semi Final</div>
-        
-        <div class="match" onclick="openModal('gambar/lineup-semifinal.jpg')">
-          <div class="team">
-            <span>Team A</span>
-            <span class="score">0</span>
-          </div>
-          <div class="team">
-            <span>Team C</span>
-            <span class="score">0</span>
-          </div>
-          <span class="match-hint">🔍 Klik untuk Lineup</span>
-        </div>
-      </div>
+  function closeModal() {
+    document.getElementById('lineupModal').style.display = 'none';
+  }
 
-  <div class="match" onclick="openModal('gambar/lineup-semifinal.jpg')">
-          <div class="team">
-            <span>Team A</span>
-            <span class="score">0</span>
-          </div>
-          <div class="team">
-            <span>Team C</span>
-            <span class="score">0</span>
-          </div>
-          <span class="match-hint">🔍 Klik untuk Lineup</span>
-        </div>
-</div>
-  
+  window.onclick = function(event) {
+    const modal = document.getElementById('lineupModal');
+    if (event.target === modal) closeModal();
+  }
 
-      <!-- Grand Final -->
-      <div class="round">
-        <div class="round-title" style="color: #ffb703;">Grand Final</div>
-        
-        <div class="match grand-final" onclick="openModal('gambar/lineup-grandfinal.jpg')">
-          <div class="team">
-            <span>TBD</span>
-            <span class="score">-</span>
-          </div>
-          <div class="team">
-            <span>TBD</span>
-            <span class="score">-</span>
-          </div>
-          <span class="match-hint" style="color: #ffb703;">🏆 Klik untuk Lineup</span>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <a href="index.html" class="btn-back">← Kembali ke Utama</a>
-
-  <!-- MODAL POPUP -->
-  <div id="lineupModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal()">&times;</span>
-      <img id="lineupImg" src="" alt="Lineup Tim">
-    </div>
-  </div>
-
-  <script>
-    function openModal(imageSrc) {
-      document.getElementById('lineupImg').src = imageSrc;
-      document.getElementById('lineupModal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('lineupModal').style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-      const modal = document.getElementById('lineupModal');
-      if (event.target === modal) {
-        closeModal();
-      }
-    }
-  </script>
-
-</body>
-</html>
-
+  renderBracket();
+</script>
