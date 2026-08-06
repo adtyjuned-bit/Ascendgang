@@ -289,25 +289,27 @@ TOURNAMENT BRACKET
 
 <!-- ðŸŸ¢ EDIT NAMA TIM -->
 
-<div class="match">
+<div class="match" onclick="openModal('ascend.jpg')">
 
 Team A vs Team B
 
 </div>
     
-<div class="match">
+<div class="match" onclick="openModal('ascend.jpg')">
 
 Team C vs Team D
 
 </div>
 
-<div class="match">
+<div class="match" onclick="openModal('ascend.jpg')">
+
 
 Team E vs Team F
 
 </div>
 
-<div class="match">
+<div class="match" onclick="openModal('ascend.jpg')">
+
 
 Team G vs Team H
 
@@ -319,13 +321,15 @@ Team G vs Team H
 
 <h3>Semi Final</h3>
 
-<div class="match">
+<div class="match" onclick="openModal('ascend.jpg')">
+
 
 Team A vs Team B
 
 </div>
 
-<div class="match">
+<div class="match" onclick="openModal('ascend.jpg')">
+
 
 Team C vs Team D
 
@@ -337,7 +341,7 @@ Team C vs Team D
 
 <h3>Grand Final</h3>
 
-<div class="match champion">
+<div class="match champion" onclick="openModal('ascend.jpg')">
 
 Team A vs Team B
 
@@ -416,6 +420,14 @@ Yes.
 </div>
 
 </section>
+
+<!-- MODAL POPUP LINEUP -->
+<div id="lineupModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <img id="lineupImg" src="" alt="Lineup Tim">
+  </div>
+</div>
 
 <!-- ================================================= -->
 <!-- FOOTER                                            -->
