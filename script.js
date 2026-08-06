@@ -46,7 +46,7 @@ if(distance<0){
 
 clearInterval(countdown);
 
-document.getElementById("countdown").innerHTML="<h2>EVENT STARTED</h2>";
+document.getElementById("countdown").innerHTML="<h2>COOMING SOON</h2>";
 
 }
 
