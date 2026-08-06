@@ -176,26 +176,26 @@ window.onclick = function(event) {
     // ==========================================
     const staffList = [
       {
-        name: "Adtya",
+        name: "NAIN VANCE",
         role: "Owner / Head Admin",
         avatar: "gambar/staff1.png", // Gantilah sesuai lokasi & nama foto staff
-        roblox: "@Adtya_Ascend",
-        joined: "Januari 2023",
-        events: "25+ Event",
+        roblox: "@9ineverse",
+        joined: "AGUSTUS 2026",
+        events: "5+ Event",
         status: "Active",
-        discord: "https://discord.gg/link-kamu",
-        instagram: "https://instagram.com/username",
-        tiktok: "https://tiktok.com/@username"
+        discord: "@jvstnine",
+        instagram: "SECRET",
+        tiktok: "https://tiktok.com/@nainsan_"
       },
       {
-        name: "Vortex",
-        role: "Tournament Manager",
+        name: "CESHI",
+        role: "WAKIL OWNER",
         avatar: "gambar/staff2.png",
-        roblox: "@Vortex_Rbx",
-        joined: "Maret 2023",
-        events: "18 Event",
+        roblox: "@alexiciusbro",
+        joined: "AGUSTUS 2023",
+        events: "3 Event",
         status: "Active",
-        discord: "https://discord.gg/link-kamu",
+        discord: "",
         instagram: "",
         tiktok: ""
       }
