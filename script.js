@@ -73,7 +73,7 @@ loader.style.display="none";
 
 },600);
 
-},1200);
+},3000);
 
 });
 
