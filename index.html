@@ -320,6 +320,43 @@ OUR SPONSORS
 
 </section>
 
+
+<!-- Swiper CSS Library CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<!-- SLIDER STAFF SHOWCASE -->
+<div class="staff-section">
+  <h2>OUR OFFICIAL STAFF</h2>
+  <p class="sub-title">👈 Geser Kiri / Kanan & Klik foto untuk Stat & Sosmed 👉</p>
+
+  <div class="swiper myStaffSwiper">
+    <div class="swiper-wrapper" id="staffWrapper">
+      <!-- Di-render otomatis lewat JS -->
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+<!-- POPUP STATISTIK STAFF -->
+<div id="staffModal" class="modal-staff">
+  <div class="modal-staff-content">
+    <span class="close-btn-staff" onclick="closeStaffModal()">&times;</span>
+    <img id="mAvatar" class="modal-avatar-staff" src="" alt="Avatar">
+    <h3 id="mName" style="color: #fff;">-</h3>
+    <p id="mRole" style="color: #00d2ff; font-size: 13px;">-</p>
+
+    <div class="stats-box">
+      <div class="stat-row"><span class="stat-label">Roblox:</span><span id="mRoblox" class="stat-val">-</span></div>
+      <div class="stat-row"><span class="stat-label">Jabatan Sejak:</span><span id="mJoined" class="stat-val">-</span></div>
+      <div class="stat-row"><span class="stat-label">Event Handled:</span><span id="mEvents" class="stat-val">-</span></div>
+      <div class="stat-row"><span class="stat-label">Status:</span><span id="mStatus" class="stat-val" style="color: #00ff87;">-</span></div>
+    </div>
+
+    <div class="sosmed-box" id="mSosmed"></div>
+  </div>
+</div>
+    
+
 <!-- ================================================= -->
 <!-- FAQ                                               -->
 <!-- ================================================= -->
