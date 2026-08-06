@@ -10,15 +10,16 @@
    Tahun, Bulan-1, Tanggal, Jam, Menit, Detik
    Contoh:
    2026,10,15 = 15 November 2026
+   hapus // untuk aktifkan
    ======================================================= */
 
-const eventDate = new Date(2026,10,15,19,0,0).getTime();
+//const eventDate = new Date(2026,10,15,19,0,0).getTime();
 
 
 /* =======================================================
    🔴 COUNTDOWN
    ======================================================= */
-
+/*
 const countdown = setInterval(()=>{
 
 const now = new Date().getTime();
@@ -50,7 +51,7 @@ document.getElementById("countdown").innerHTML="<h2>EVENT STARTED</h2>";
 }
 
 },1000);
-
+ <!--waktu mati hapus /* untuk aktifkan -->
 
 
 /* =======================================================
