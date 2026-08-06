@@ -147,3 +147,27 @@ el.classList.add("fade-up");
 observer.observe(el);
 
 });
+
+// Fungsi untuk membuka modal
+function openModal(imageSrc) {
+    const modal = document.getElementById('lineupModal');
+    const modalImg = document.getElementById('lineupImg');
+
+    modalImg.src = imageSrc; // Memasukkan link gambar ke dalam img tag
+    modal.style.display = 'flex'; // Menampilkan modal
+}
+
+// Fungsi untuk menutup modal
+function closeModal() {
+    const modal = document.getElementById('lineupModal');
+    modal.style.display = 'none'; // Menyembunyikan modal
+}
+
+// Opsional: Menutup modal jika user mengklik area gelap di luar gambar
+window.onclick = function(event) {
+    const modal = document.getElementById('lineupModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
