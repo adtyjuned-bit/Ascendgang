@@ -171,3 +171,102 @@ window.onclick = function(event) {
     }
 }
 
+ // ==========================================
+    // DATA STAFF (GAMPANG DITAMBAH / DIEDIT)
+    // ==========================================
+    const staffList = [
+      {
+        name: "Adtya",
+        role: "Owner / Head Admin",
+        avatar: "gambar/staff1.png", // Gantilah sesuai lokasi & nama foto staff
+        roblox: "@Adtya_Ascend",
+        joined: "Januari 2023",
+        events: "25+ Event",
+        status: "Active",
+        discord: "https://discord.gg/link-kamu",
+        instagram: "https://instagram.com/username",
+        tiktok: "https://tiktok.com/@username"
+      },
+      {
+        name: "Vortex",
+        role: "Tournament Manager",
+        avatar: "gambar/staff2.png",
+        roblox: "@Vortex_Rbx",
+        joined: "Maret 2023",
+        events: "18 Event",
+        status: "Active",
+        discord: "https://discord.gg/link-kamu",
+        instagram: "",
+        tiktok: ""
+      }
+    ];
+
+    // Fungsi Render Kartu Staff
+    function renderStaffSlider() {
+      const wrapper = document.getElementById('staffWrapper');
+      if (!wrapper) return;
+      wrapper.innerHTML = '';
+
+      staffList.forEach((staff, index) => {
+        const slide = document.createElement('div');
+        slide.className = 'swiper-slide';
+        slide.innerHTML = `
+          <div class="staff-card" onclick="openStaffModal(${index})">
+            <div class="avatar-frame">
+              <img src="${staff.avatar}" class="avatar-img" alt="${staff.name}">
+            </div>
+            <div class="staff-name">${staff.name}</div>
+            <div class="staff-role">${staff.role}</div>
+            <div class="tap-hint">📊 Tap Stats & Sosmed</div>
+          </div>
+        `;
+        wrapper.appendChild(slide);
+      });
+    }
+
+    // Jalankan Render
+    renderStaffSlider();
+
+    // Inisialisasi Slider Slide Kanan / Kiri
+    var staffSwiper = new Swiper(".myStaffSwiper", {
+      slidesPerView: 1,
+      spaceBetween: 15,
+      pagination: { el: ".swiper-pagination", clickable: true },
+      breakpoints: {
+        640: { slidesPerView: 2, spaceBetween: 20 },
+        992: { slidesPerView: 3, spaceBetween: 25 }
+      }
+    });
+
+    // Fungsi Buka Pop-up Modal Stats & Sosmed
+    function openStaffModal(index) {
+      const data = staffList[index];
+      document.getElementById('mAvatar').src = data.avatar;
+      document.getElementById('mName').innerText = data.name;
+      document.getElementById('mRole').innerText = data.role;
+      document.getElementById('mRoblox').innerText = data.roblox;
+      document.getElementById('mJoined').innerText = data.joined;
+      document.getElementById('mEvents').innerText = data.events;
+      document.getElementById('mStatus').innerText = data.status;
+
+      const sosmedBox = document.getElementById('mSosmed');
+      sosmedBox.innerHTML = '';
+
+      if (data.discord) sosmedBox.innerHTML += `<a href="${data.discord}" target="_blank" class="sosmed-btn">💬 Discord</a>`;
+      if (data.instagram) sosmedBox.innerHTML += `<a href="${data.instagram}" target="_blank" class="sosmed-btn">📸 Instagram</a>`;
+      if (data.tiktok) sosmedBox.innerHTML += `<a href="${data.tiktok}" target="_blank" class="sosmed-btn">🎵 TikTok</a>`;
+
+      document.getElementById('staffModal').style.display = 'flex';
+    }
+
+    // Fungsi Tutup Pop-up
+    function closeStaffModal() {
+      document.getElementById('staffModal').style.display = 'none';
+    }
+
+    // Tutup Pop-up jika klik di luar kotak
+    window.onclick = function(e) {
+      const modal = document.getElementById('staffModal');
+      if (e.target === modal) closeStaffModal();
+    }
+
