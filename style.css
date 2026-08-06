@@ -171,27 +171,9 @@ padding:120px 20px;
 }
 
 .hero-content{
-    position:relative;
     max-width:900px;
-    margin:auto;
-    z-index:1;
 }
 
-/* =======================================================
-   🟢 LOGO BACKGROUND HERO
-   ======================================================= */
-
-.hero-content::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:url("assets/logo.png") center center no-repeat;
-    background-size:420px;
-    opacity:0.20;
-    z-index:-1;
-    pointer-events:none;
-    filter:drop-shadow(0 0 40px rgba(124,58,237,.8));
-}
 
 .hero-logo{
 
