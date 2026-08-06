@@ -1,1 +1,148 @@
-/* =======================================================<br/>   ASCEND CHAMPIONSHIP<br/>   script.js<br/>   ======================================================= */<br/><br/><br/>/* =======================================================<br/>   🟢 EDIT DI SINI - TANGGAL EVENT<br/>   Format:<br/>   Tahun, Bulan-1, Tanggal, Jam, Menit, Detik<br/>   Contoh:<br/>   2026,10,15 = 15 November 2026<br/>   ======================================================= */<br/><br/>const eventDate = new Date(2026,10,15,19,0,0).getTime();<br/><br/><br/>/* =======================================================<br/>   🔴 COUNTDOWN<br/>   ======================================================= */<br/><br/>const countdown = setInterval(()=&gt;{<br/><br/>const now = new Date().getTime();<br/><br/>const distance = eventDate - now;<br/><br/>const days = Math.floor(distance/(1000*60*60*24));<br/><br/>const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));<br/><br/>const minutes = Math.floor((distance%(1000*60*60))/(1000*60));<br/><br/>const seconds = Math.floor((distance%(1000*60))/1000);<br/><br/>document.getElementById(&quot;days&quot;).innerHTML = days;<br/><br/>document.getElementById(&quot;hours&quot;).innerHTML = hours;<br/><br/>document.getElementById(&quot;minutes&quot;).innerHTML = minutes;<br/><br/>document.getElementById(&quot;seconds&quot;).innerHTML = seconds;<br/><br/>if(distance&lt;0){<br/><br/>clearInterval(countdown);<br/><br/>document.getElementById(&quot;countdown&quot;).innerHTML=&quot;&lt;h2&gt;EVENT STARTED&lt;/h2&gt;&quot;;<br/><br/>}<br/><br/>},1000);<br/><br/><br/><br/>/* =======================================================<br/>   🔴 LOADING SCREEN<br/>   ======================================================= */<br/><br/>window.addEventListener(&quot;load&quot;,()=&gt;{<br/><br/>setTimeout(()=&gt;{<br/><br/>const loader=document.getElementById(&quot;loader&quot;);<br/><br/>loader.style.opacity=&quot;0&quot;;<br/><br/>loader.style.pointerEvents=&quot;none&quot;;<br/><br/>setTimeout(()=&gt;{<br/><br/>loader.style.display=&quot;none&quot;;<br/><br/>},600);<br/><br/>},1200);<br/><br/>});<br/><br/><br/><br/>/* =======================================================<br/>   🔴 NAVBAR SCROLL EFFECT<br/>   ======================================================= */<br/><br/>window.addEventListener(&quot;scroll&quot;,()=&gt;{<br/><br/>const header=document.querySelector(&quot;header&quot;);<br/><br/>if(window.scrollY&gt;50){<br/><br/>header.style.background=&quot;rgba(0,0,0,.75)&quot;;<br/><br/>header.style.backdropFilter=&quot;blur(18px)&quot;;<br/><br/>}else{<br/><br/>header.style.background=&quot;rgba(0,0,0,.35)&quot;;<br/><br/>}<br/><br/>});<br/><br/><br/><br/>/* =======================================================<br/>   🔴 HERO PARALLAX<br/>   ======================================================= */<br/><br/>window.addEventListener(&quot;scroll&quot;,()=&gt;{<br/><br/>const hero=document.querySelector(&quot;.hero-content&quot;);<br/><br/>if(hero){<br/><br/>hero.style.transform=`translateY(${window.scrollY*-0.18}px)`;<br/><br/>}<br/><br/>});<br/><br/><br/><br/>/* =======================================================<br/>   🔴 SCROLL ANIMATION<br/>   ======================================================= */<br/><br/>const observer=new IntersectionObserver(entries=&gt;{<br/><br/>entries.forEach(entry=&gt;{<br/><br/>if(entry.isIntersecting){<br/><br/>entry.target.classList.add(&quot;show&quot;);<br/><br/>}<br/><br/>});<br/><br/>});<br/><br/>document.querySelectorAll(&quot;.card,.register-box,.match,.faq-item,.hero-content&quot;).forEach(el=&gt;{<br/><br/>el.classList.add(&quot;fade-up&quot;);<br/><br/>observer.observe(el);<br/><br/>});
+/* =======================================================
+   ASCEND CHAMPIONSHIP
+   script.js
+   ======================================================= */
+
+
+/* =======================================================
+   🟢 EDIT DI SINI - TANGGAL EVENT
+   Format:
+   Tahun, Bulan-1, Tanggal, Jam, Menit, Detik
+   Contoh:
+   2026,10,15 = 15 November 2026
+   ======================================================= */
+
+const eventDate = new Date(2026,10,15,19,0,0).getTime();
+
+
+/* =======================================================
+   🔴 COUNTDOWN
+   ======================================================= */
+
+const countdown = setInterval(()=>{
+
+const now = new Date().getTime();
+
+const distance = eventDate - now;
+
+const days = Math.floor(distance/(1000*60*60*24));
+
+const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+
+const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+
+const seconds = Math.floor((distance%(1000*60))/1000);
+
+document.getElementById("days").innerHTML = days;
+
+document.getElementById("hours").innerHTML = hours;
+
+document.getElementById("minutes").innerHTML = minutes;
+
+document.getElementById("seconds").innerHTML = seconds;
+
+if(distance<0){
+
+clearInterval(countdown);
+
+document.getElementById("countdown").innerHTML="<h2>EVENT STARTED</h2>";
+
+}
+
+},1000);
+
+
+
+/* =======================================================
+   🔴 LOADING SCREEN
+   ======================================================= */
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+const loader=document.getElementById("loader");
+
+loader.style.opacity="0";
+
+loader.style.pointerEvents="none";
+
+setTimeout(()=>{
+
+loader.style.display="none";
+
+},600);
+
+},1200);
+
+});
+
+
+
+/* =======================================================
+   🔴 NAVBAR SCROLL EFFECT
+   ======================================================= */
+
+window.addEventListener("scroll",()=>{
+
+const header=document.querySelector("header");
+
+if(window.scrollY>50){
+
+header.style.background="rgba(0,0,0,.75)";
+
+header.style.backdropFilter="blur(18px)";
+
+}else{
+
+header.style.background="rgba(0,0,0,.35)";
+
+}
+
+});
+
+
+
+/* =======================================================
+   🔴 HERO PARALLAX
+   ======================================================= */
+
+window.addEventListener("scroll",()=>{
+
+const hero=document.querySelector(".hero-content");
+
+if(hero){
+
+hero.style.transform=`translateY(${window.scrollY*-0.18}px)`;
+
+}
+
+});
+
+
+
+/* =======================================================
+   🔴 SCROLL ANIMATION
+   ======================================================= */
+
+const observer=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.classList.add("show");
+
+}
+
+});
+
+});
+
+document.querySelectorAll(".card,.register-box,.match,.faq-item,.hero-content").forEach(el=>{
+
+el.classList.add("fade-up");
+
+observer.observe(el);
+
+});
