@@ -228,46 +228,6 @@
         }
 
 
-        /* =====================================================
-   CSS 07 — BIG COUNTDOWN
-   Fungsi:
-   Angka countdown besar di tengah loading screen.
-===================================================== */
-
-.logo {
-
-    width: 150px;
-    height: 150px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(255,255,255,0.25);
-
-    border-radius: 50%;
-
-    font-size: 80px;
-
-    font-weight: 900;
-
-    line-height: 1;
-
-    color: #ffffff;
-
-    text-shadow:
-        0 0 20px rgba(255,255,255,0.35),
-        0 0 50px rgba(255,255,255,0.15);
-
-    box-shadow:
-        0 0 30px rgba(255,255,255,0.08),
-        inset 0 0 30px rgba(255,255,255,0.04);
-
-    transition:
-        transform 0.2s ease,
-        opacity 0.2s ease;
-}
 
 /* =====================================================
    CSS 07 — BIG COUNTDOWN
@@ -542,45 +502,13 @@
 
         <div class="center-content">
 
+<!-- =====================================================
+     HTML 05 — BIG COUNTDOWN
+===================================================== -->
 
-            /* =====================================================
-   CSS 07 — BIG COUNTDOWN
-   Fungsi:
-   Angka besar di tengah yang bergerak 9 → 0.
-===================================================== */
-
-.logo {
-    width: 150px;
-    height: 150px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 50%;
-
-    font-size: 80px;
-    font-weight: 900;
-
-    color: white;
-
-    text-shadow:
-        0 0 20px rgba(255,255,255,0.4),
-        0 0 50px rgba(255,255,255,0.2);
-
-    transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
-}
-
-
-/* Efek setiap angka berubah */
-
-.logo.change {
-    transform: scale(1.2);
-    opacity: 0.5;
-}
+<div class="logo" id="bigCountdown">
+    9
+</div>
             
             <!-- =============================================
                  HTML 06 — EVENT TITLE
