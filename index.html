@@ -731,6 +731,24 @@ const loadingInterval = setInterval(() => {
 
 
 }, 50);
+
+    if (progress >= 100) {
+
+    clearInterval(loadingInterval);
+
+    /* =====================================================
+       PEMANGGILAN DASHBOARD
+       Fungsi:
+       Setelah loading selesai, pindah ke dashboard.html
+    ====================================================== */
+
+    setTimeout(() => {
+
+        window.location.href = "dashboard.html";
+
+    }, 1000);
+
+    }
         
 </script>
     
