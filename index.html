@@ -229,59 +229,61 @@
 
 
         /* =====================================================
-           CSS 07 — LOGO
-           Fungsi:
-           Tempat logo utama.
-           
-           Sekarang masih menggunakan angka "9".
-           Nanti bisa diganti gambar/logo.
-        ====================================================== */
+   CSS 07 — BIG COUNTDOWN
+   Fungsi:
+   Angka countdown besar di tengah loading screen.
+===================================================== */
 
-        .logo {
+.logo {
 
-            width: 110px;
-            height: 110px;
+    width: 150px;
+    height: 150px;
 
-            display: flex;
+    display: flex;
 
-            align-items: center;
-            justify-content: center;
+    align-items: center;
+    justify-content: center;
 
-            border: 1px solid rgba(255,255,255,0.35);
+    border: 1px solid rgba(255,255,255,0.25);
 
-            border-radius: 50%;
+    border-radius: 50%;
 
-            font-size: 30px;
+    font-size: 80px;
 
-            font-weight: 900;
+    font-weight: 900;
 
-            box-shadow:
-                0 0 30px rgba(255,255,255,0.08),
-                inset 0 0 30px rgba(255,255,255,0.04);
+    line-height: 1;
 
-            animation:
-                logoPulse
-                2s
-                ease-in-out
-                infinite;
-        }
+    color: #ffffff;
 
+    text-shadow:
+        0 0 20px rgba(255,255,255,0.35),
+        0 0 50px rgba(255,255,255,0.15);
 
-        @keyframes logoPulse {
+    box-shadow:
+        0 0 30px rgba(255,255,255,0.08),
+        inset 0 0 30px rgba(255,255,255,0.04);
 
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.05);
-            }
-
-        }
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
 
 
-        /* =====================================================
+/* =====================================================
+   CSS 07.01 — COUNTDOWN CHANGE
+   Fungsi:
+   Efek ketika angka berubah.
+===================================================== */
+
+.logo.countdown-change {
+
+    transform: scale(1.15);
+
+    opacity: 0.5;
+
+    
+}================================================
            CSS 08 — EVENT TITLE
            Fungsi:
            Mengatur tulisan ASCEND × AVENOX.
@@ -515,18 +517,15 @@
         <div class="center-content">
 
 
-            <!-- =============================================
-                 HTML 05 — LOGO
-                 Fungsi:
-                 Logo utama loading screen.
-            ============================================== -->
+            <!-- =====================================================
+     HTML 05 — BIG COUNTDOWN
+     Fungsi:
+     Angka besar yang mengikuti loading.
+====================================================== -->
 
-            <div class="logo">
-
-                9
-
-            </div>
-
+<div class="logo" id="bigCountdown">
+    9
+</div>
 
             <!-- =============================================
                  HTML 06 — EVENT TITLE
@@ -617,12 +616,11 @@
 
 
 
-    
+    <script>
 
     /* =====================================================
        04. JAVASCRIPT — LOADING SYSTEM
     ====================================================== */
-<script>
 
     /* =====================================================
        JS 01 — PROGRESS
@@ -715,6 +713,17 @@
         }
 
     }, 50);
+
+
+
+        /* =====================================================
+   JS 02.01 — BIG COUNTDOWN
+   Fungsi:
+   Menghubungkan angka besar dengan progress loading.
+===================================================== */
+
+const bigCountdown =
+    document.getElementById("bigCountdown");
 
 </script>
 
