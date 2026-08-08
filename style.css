@@ -1532,6 +1532,93 @@ section{
     }
 }
 
+/* =================================
+   ASCEND × AVENOX BACKGROUND
+================================= */
+
+main {
+    position: relative;
+    overflow: hidden;
+}
+
+.collab-bg-text {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: max-content;
+
+    z-index: 0;
+
+    pointer-events: none;
+    user-select: none;
+
+    white-space: nowrap;
+
+    font-family: "Orbitron", sans-serif;
+
+    font-size: clamp(70px, 14vw, 220px);
+
+    font-weight: 900;
+
+    letter-spacing: 10px;
+
+    color: transparent;
+
+    -webkit-text-stroke: 1px rgba(255, 255, 255, .055);
+
+    opacity: .65;
+
+    filter: blur(.2px);
+
+    animation: collabFloat 8s ease-in-out infinite;
+}
+
+
+/* semua konten main berada di atas tulisan */
+
+main > *:not(.collab-bg-text) {
+    position: relative;
+    z-index: 1;
+}
+
+
+@keyframes collabFloat {
+
+    0%, 100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -52%)
+            scale(1.025);
+    }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .collab-bg-text {
+
+        font-size: 95px;
+
+        letter-spacing: 5px;
+
+        opacity: .45;
+
+        transform:
+            translate(-50%, -50%)
+            rotate(-8deg);
+    }
+}
 
 
 /* =======================================================
