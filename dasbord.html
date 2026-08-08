@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <!-- =====================================================
+         01. HTML — HEAD
+         Fungsi:
+         Pengaturan dasar halaman dashboard.
+    ====================================================== -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ASCEND × AVENOX — Dashboard</title>
+
+
+    <!-- =====================================================
+         02. CSS
+    ====================================================== -->
+
+    <style>
+
+        /* =====================================================
+           CSS 01 — RESET
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =====================================================
+           CSS 02 — BODY
+        ====================================================== */
+
+        body {
+
+            min-height: 100vh;
+
+            background: #050505;
+
+            color: white;
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            overflow-x: hidden;
+        }
+
+
+        /* =====================================================
+           CSS 03 — DASHBOARD
+           Container utama.
+        ====================================================== */
+
+        .dashboard {
+
+            position: relative;
+
+            min-height: 100vh;
+
+            overflow: hidden;
+
+            background:
+
+                radial-gradient(
+                    circle at 50% 50%,
+                    rgba(255,255,255,0.07),
+                    transparent 35%
+                ),
+
+                #050505;
+        }
+
+
+        /* =====================================================
+           CSS 04 — BACKGROUND GLOW
+        ====================================================== */
+
+        .background-glow {
+
+            position: fixed;
+
+            width: 500px;
+            height: 500px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.05);
+
+            filter: blur(110px);
+
+            pointer-events: none;
+
+            transform:
+                translate(-50%, -50%);
+
+            z-index: 0;
+        }
+
+
+        /* =====================================================
+           CSS 05 — BACKGROUND TEXT
+        ====================================================== */
+
+        .background-text {
+
+            position: fixed;
+
+            inset: 0;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            gap: 20px;
+
+            pointer-events: none;
+
+            user-select: none;
+
+            z-index: 0;
+
+            transition:
+                transform 0.2s ease-out;
+        }
+
+
+        .background-text span {
+
+            width: 100%;
+
+            text-align: center;
+
+            font-size:
+                clamp(
+                    80px,
+                    15vw,
+                    220px
+                );
+
+            font-weight: 900;
+
+            letter-spacing: 10px;
+
+            line-height: 0.75;
+
+            color: transparent;
+
+            -webkit-text-stroke:
+                1px rgba(255,255,255,0.09);
+
+            white-space: nowrap;
+        }
+
+
+        .background-text span:first-child {
+
+            transform:
+                translateX(-30px);
+        }
+
+
+        .background-text span:last-child {
+
+            transform:
+                translateX(30px);
+        }
+
+
+        /* =====================================================
+           CSS 06 — PARTICLES
+        ====================================================== */
+
+        .particles {
+
+            position: fixed;
+
+            inset: 0;
+
+            pointer-events: none;
+
+            overflow: hidden;
+
+            z-index: 1;
+        }
+
+
+        .particle {
+
+            position: absolute;
+
+            width: 2px;
+            height: 2px;
+
+            background: white;
+
+            border-radius: 50%;
+
+            opacity: 0.25;
+
+            animation:
+                particleFloat
+                linear
+                infinite;
+        }
+
+
+        @keyframes particleFloat {
+
+            from {
+
+                transform:
+                    translateY(100vh);
+
+            }
+
+            to {
+
+                transform:
+                    translateY(-20px);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           CSS 07 — NAVBAR
+        ====================================================== */
+
+        .navbar {
+
+            position: relative;
+
+            z-index: 10;
+
+            height: 80px;
+
+            padding:
+                0 5%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            background:
+                rgba(5,5,5,0.35);
+
+            backdrop-filter:
+                blur(10px);
+        }
+
+
+        /* =====================================================
+           CSS 08 — LOGO NAVBAR
+        ====================================================== */
+
+        .nav-logo {
+
+            font-size: 18px;
+
+            font-weight: 900;
+
+            letter-spacing: 4px;
+        }
+
+
+        .nav-logo span {
+
+            opacity: 0.35;
+        }
+
+
+        /* =====================================================
+           CSS 09 — NAVIGATION
+        ====================================================== */
+
+        .nav-links {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+        }
+
+
+        .nav-links a {
+
+            position: relative;
+
+            color:
+                rgba(255,255,255,0.5);
+
+            text-decoration: none;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .nav-links a::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: -8px;
+
+            width: 0;
+
+            height: 1px;
+
+            background: white;
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .nav-links a:hover {
+
+            color: white;
+        }
+
+
+        .nav-links a:hover::after {
+
+            width: 100%;
+        }
+
+
+        /* =====================================================
+           CSS 10 — HERO
+        ====================================================== */
+
+        .hero {
+
+            position: relative;
+
+            z-index: 5;
+
+            min-height:
+                calc(100vh - 80px);
+
+            padding:
+                80px 8%;
+
+            display: flex;
+
+            align-items: center;
+        }
+
+
+        /* =====================================================
+           CSS 11 — HERO CONTENT
+        ====================================================== */
+
+        .hero-content {
+
+            max-width: 800px;
+
+            transition:
+                transform 0.15s ease-out;
+        }
+
+
+        /* =====================================================
+           CSS 12 — SMALL LABEL
+        ====================================================== */
+
+        .hero-label {
+
+            margin-bottom: 20px;
+
+            font-size: 10px;
+
+            letter-spacing: 6px;
+
+            color:
+                rgba(255,255,255,0.4);
+        }
+
+
+        /* =====================================================
+           CSS 13 — TITLE
+        ====================================================== */
+
+        .hero-title {
+
+            font-size:
+                clamp(
+                    50px,
+                    9vw,
+                    120px
+                );
+
+            font-weight: 900;
+
+            line-height: 0.85;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+        }
+
+
+        .hero-title span {
+
+            color:
+                rgba(255,255,255,0.25);
+        }
+
+
+        /* =====================================================
+           CSS 14 — DESCRIPTION
+        ====================================================== */
+
+        .hero-description {
+
+            max-width: 550px;
+
+            margin:
+                30px 0;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+            letter-spacing: 1.5px;
+
+            color:
+                rgba(255,255,255,0.45);
+        }
+
+
+        /* =====================================================
+           CSS 15 — BUTTONS
+        ====================================================== */
+
+        .hero-buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .button {
+
+            padding:
+                15px 25px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.25);
+
+            background:
+                rgba(255,255,255,0.03);
+
+            color: white;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+            letter-spacing: 3px;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                0.3s ease;
+        }
+
+
+        .button:hover {
+
+            background: white;
+
+            color: black;
+
+            transform:
+                translateY(-4px);
+
+            box-shadow:
+                0 15px 40px
+                rgba(255,255,255,0.08);
+        }
+
+
+        /* =====================================================
+           CSS 16 — EVENT STATUS
+        ====================================================== */
+
+        .status {
+
+            position: absolute;
+
+            right: 8%;
+
+            bottom: 12%;
+
+            z-index: 10;
+
+            padding: 20px;
+
+            width: 220px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.1);
+
+            background:
+                rgba(255,255,255,0.025);
+
+            backdrop-filter:
+                blur(10px);
+        }
+
+
+        .status-title {
+
+            font-size: 8px;
+
+            letter-spacing: 3px;
+
+            color:
+                rgba(255,255,255,0.4);
+
+            margin-bottom: 12px;
+        }
+
+
+        .status-main {
+
+            font-size: 14px;
+
+            font-weight: 900;
+
+            letter-spacing: 2px;
+        }
+
+
+        .status-live {
+
+            display: inline-block;
+
+            width: 6px;
+
+            height: 6px;
+
+            margin-right: 8px;
+
+            border-radius: 50%;
+
+            background: white;
+
+            box-shadow:
+                0 0 10px white;
+
+            animation:
+                pulse 1.5s infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+        }
+
+
+        /* =====================================================
+           CSS 17 — MOBILE
+        ====================================================== */
+
+        @media (max-width: 700px) {
+
+            .navbar {
+
+                height: 70px;
+            }
+
+
+            .nav-links {
+
+                display: none;
+            }
+
+
+            .hero {
+
+                min-height:
+                    calc(100vh - 70px);
+
+                padding:
+                    50px 7%;
+            }
+
+
+            .hero-title {
+
+                font-size:
+                    14vw;
+            }
+
+
+            .status {
+
+                position: relative;
+
+                right: auto;
+
+                bottom: auto;
+
+                margin:
+                    40px 7%;
+
+                width: auto;
+            }
+
+
+            .hero-buttons {
+
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+
+            .button {
+
+                width: 100%;
+
+                text-align: center;
+
+                max-width: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         03. HTML — DASHBOARD
+    ====================================================== -->
+
+    <main
+        class="dashboard"
+        id="dashboard"
+    >
+
+
+        <!-- =================================================
+             HTML 01 — GLOW
+        ================================================== -->
+
+        <div
+            class="background-glow"
+            id="backgroundGlow">
+        </div>
+
+
+        <!-- =================================================
+             HTML 02 — PARTICLES
+        ================================================== -->
+
+        <div
+            class="particles"
+            id="particles">
+        </div>
+
+
+        <!-- =================================================
+             HTML 03 — BACKGROUND TEXT
+        ================================================== -->
+
+        <div
+            class="background-text"
+            id="backgroundText">
+
+            <span>ASCEND</span>
+
+            <span>AVENOX</span>
+
+        </div>
+
+
+        <!-- =================================================
+             HTML 04 — NAVBAR
+        ================================================== -->
+
+        <header class="navbar">
+
+
+            <div class="nav-logo">
+
+                ASCEND
+                <span>× AVENOX</span>
+
+            </div>
+
+
+            <nav class="nav-links">
+
+                <a href="dashboard.html">
+                    HOME
+                </a>
+
+                <a href="bracket.html">
+                    BRACKET
+                </a>
+
+                <a href="teams.html">
+                    TEAMS
+                </a>
+
+                <a href="schedule.html">
+                    SCHEDULE
+                </a>
+
+            </nav>
+
+        </header>
+
+
+        <!-- =================================================
+             HTML 05 — HERO
+        ================================================== -->
+
+        <section class="hero">
+
+
+            <div
+                class="hero-content"
+                id="heroContent"
+            >
+
+
+                <!-- =========================================
+                     HTML 06 — LABEL
+                ========================================== -->
+
+                <div class="hero-label">
+
+                    OFFICIAL CHAMPIONSHIP
+
+                </div>
+
+
+                <!-- =========================================
+                     HTML 07 — TITLE
+                ========================================== -->
+
+                <h1 class="hero-title">
+
+                    ASCEND
+
+                    <br>
+
+                    <span>CHAMPIONSHIP</span>
+
+                </h1>
+
+
+                <!-- =========================================
+                     HTML 08 — DESCRIPTION
+                ========================================== -->
+
+                <p class="hero-description">
+
+                    Welcome to the official ASCEND × AVENOX
+                    Championship dashboard. Explore the
+                    competition, teams, brackets and
+                    upcoming matches.
+
+                </p>
+
+
+                <!-- =========================================
+                     HTML 09 — BUTTONS
+                ========================================== -->
+
+                <div class="hero-buttons">
+
+
+                    <a
+                        href="bracket.html"
+                        class="button"
+                    >
+
+                        VIEW BRACKET
+
+                    </a>
+
+
+                    <a
+                        href="teams.html"
+                        class="button"
+                    >
+
+                        EXPLORE TEAMS
+
+                    </a>
+
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             HTML 10 — EVENT STATUS
+        ================================================== -->
+
+        <div class="status">
+
+            <div class="status-title">
+
+                EVENT STATUS
+
+            </div>
+
+
+            <div class="status-main">
+
+                <span
+                    class="status-live">
+                </span>
+
+                REGISTRATION OPEN
+
+            </div>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         04. JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           JS 01 — ELEMENT
+        ====================================================== */
+
+        const glow =
+            document.getElementById(
+                "backgroundGlow"
+            );
+
+        const backgroundText =
+            document.getElementById(
+                "backgroundText"
+            );
+
+        const heroContent =
+            document.getElementById(
+                "heroContent"
+            );
+
+        const particles =
+            document.getElementById(
+                "particles"
+            );
+
+
+        /* =====================================================
+           JS 02 — PARTICLE GENERATOR
+        ====================================================== */
+
+        for (
+            let i = 0;
+            i < 40;
+            i++
+        ) {
+
+            const particle =
+                document.createElement(
+                    "div"
+                );
+
+            particle.className =
+                "particle";
+
+
+            particle.style.left =
+                Math.random() * 100 + "%";
+
+
+            particle.style.animationDuration =
+                (6 + Math.random() * 10)
+                + "s";
+
+
+            particle.style.animationDelay =
+                (Math.random() * 10)
+                + "s";
+
+
+            particles.appendChild(
+                particle
+            );
+
+        }
+
+
+        /* =====================================================
+           JS 03 — INTERACTIVE BACKGROUND
+        ====================================================== */
+
+        function moveBackground(
+            x,
+            y
+        ) {
+
+
+            const centerX =
+                window.innerWidth / 2;
+
+            const centerY =
+                window.innerHeight / 2;
+
+
+            const moveX =
+                (x - centerX) * 0.015;
+
+            const moveY =
+                (y - centerY) * 0.015;
+
+
+            /* =============================================
+               Background typography
+            ============================================== */
+
+            backgroundText.style.transform =
+                `translate(${moveX}px, ${moveY}px)`;
+
+
+            /* =============================================
+               Hero parallax
+            ============================================== */
+
+            heroContent.style.transform =
+                `translate(${
+                    moveX * -0.5
+                }px, ${
+                    moveY * -0.5
+                }px)`;
+
+
+            /* =============================================
+               Glow
+            ============================================== */
+
+            glow.style.left =
+                x + "px";
+
+            glow.style.top =
+                y + "px";
+
+        }
+
+
+        /* =====================================================
+           JS 04 — MOUSE
+        ====================================================== */
+
+        document.addEventListener(
+            "mousemove",
+            (event) => {
+
+                moveBackground(
+                    event.clientX,
+                    event.clientY
+                );
+
+            }
+        );
+
+
+        /* =====================================================
+           JS 05 — TOUCH
+           Fungsi:
+           Interaksi untuk HP.
+        ================================================
+
+        document.addEventListener(
+            "touchmove",
+            (event) => {
+
+                const touch =
+                    event.touches[0];
+
+                moveBackground(
+                    touch.clientX,
+                    touch.clientY
+                );
+
+            },
+            {
+                passive: true
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
