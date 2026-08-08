@@ -58,7 +58,7 @@ document.getElementById("countdown").innerHTML="<h2>COOMING SOON</h2>";
    🔴 LOADING SCREEN
    ======================================================= */
 
-window.addEventListener("load",()=>{
+/*window.addEventListener("load",()=>{
 
 setTimeout(()=>{
 
@@ -75,6 +75,107 @@ loader.style.display="none";
 },600);
 
 },3000);
+
+});
+
+
+
+/* =========================================
+   ASCEND × AVENOX LOADER
+========================================= */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const loader = document.getElementById("collabLoader");
+
+    const ascend = document.getElementById("loaderAscend");
+
+    const x = document.getElementById("loaderX");
+
+    const avenox = document.getElementById("loaderAvenox");
+
+    const finalLogo = document.getElementById("loaderFinal");
+
+
+    if (!loader) return;
+
+
+    /*
+        PHASE 1
+        ASCEND
+    */
+
+    setTimeout(() => {
+
+        ascend.classList.add("active");
+
+    }, 300);
+
+
+    /*
+        PHASE 2
+        X
+    */
+
+    setTimeout(() => {
+
+        ascend.classList.remove("active");
+
+        x.classList.add("active");
+
+    }, 1500);
+
+
+    /*
+        PHASE 3
+        AVENOX
+    */
+
+    setTimeout(() => {
+
+        x.classList.remove("active");
+
+        avenox.classList.add("active");
+
+    }, 2300);
+
+
+    /*
+        PHASE 4
+        ASCEND × AVENOX
+    */
+
+    setTimeout(() => {
+
+        avenox.classList.remove("active");
+
+        finalLogo.classList.add("active");
+
+    }, 3500);
+
+
+    /*
+        PHASE 5
+        EXIT
+    */
+
+    setTimeout(() => {
+
+        loader.classList.add("hide");
+
+    }, 4800);
+
+
+    /*
+        REMOVE FROM DOM
+        setelah animasi selesai
+    */
+
+    setTimeout(() => {
+
+        loader.remove();
+
+    }, 5900);
 
 });
 
