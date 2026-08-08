@@ -178,7 +178,7 @@ window.onclick = function(event) {
       {
         name: "NAIN VANCE",
         role: "Owner / Head Admin",
-        avatar: "nainn.jpg", // Gantilah sesuai lokasi & nama foto staff
+        avatar: "media/nainn.jpg", // Gantilah sesuai lokasi & nama foto staff
         roblox: "@9ineverse",
         joined: "AGUSTUS 2026",
         events: "5+ Event",
@@ -190,7 +190,7 @@ window.onclick = function(event) {
       {
         name: "CESHI",
         role: "WAKIL OWNER",
-        avatar: "cess.jpg",
+        avatar: "media/cess.jpg",
         roblox: "@alexiciusbro",
         joined: "AGUSTUS 2023",
         events: "3 Event",
