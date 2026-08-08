@@ -4,398 +4,457 @@
 <head>
 
     <!-- =====================================================
-         01. META & PAGE SETTINGS
+         01. HTML — HEAD / PENGATURAN DASAR
          Fungsi:
-         - Mengatur viewport HP/PC
+         - Mengatur bahasa
+         - Responsive HP
          - Nama halaman
-         ===================================================== -->
+    ====================================================== -->
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>ASCEND × AVENOX</title>
 
 
     <!-- =====================================================
-         02. CSS / DESIGN
-         Fungsi:
-         - Semua tampilan loading screen
-         - Background
-         - Logo
-         - Text
-         - Loading bar
-         - Animation
-         ===================================================== -->
+         02. CSS
+         Semua desain loading screen ada di bawah ini.
+    ====================================================== -->
 
     <style>
 
-        /* =====================================================
-           02.01 RESET
-           Fungsi: Menghilangkan margin/padding bawaan browser
-        ===================================================== */
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        /* =====================================================
+           CSS 01 — RESET
+           Fungsi:
+           Menghapus margin/padding bawaan browser.
+        ====================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
 
         /* =====================================================
-           02.02 BODY
-           Fungsi: Mengatur layar utama
-        ===================================================== */
+           CSS 02 — BODY
+           Fungsi:
+           Mengatur layar utama website.
+        ====================================================== */
 
-        body{
-            width:100%;
-            height:100vh;
-            overflow:hidden;
-            background:#050505;
-            color:white;
-            font-family:Arial, sans-serif;
+        body {
+            width: 100%;
+            height: 100vh;
+
+            overflow: hidden;
+
+            background: #050505;
+
+            color: #ffffff;
+
+            font-family: Arial, sans-serif;
         }
 
 
         /* =====================================================
-           02.03 LOADING SCREEN
-           Fungsi: Container utama seluruh loading screen
-        ===================================================== */
+           CSS 03 — LOADING SCREEN
+           Fungsi:
+           Container utama seluruh loading screen.
+        ====================================================== */
 
-        .loading-screen{
-            position:fixed;
-            inset:0;
+        .loading-screen {
+            position: fixed;
 
-            display:flex;
-            align-items:center;
-            justify-content:center;
+            inset: 0;
+
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
 
             background:
                 radial-gradient(
                     circle at center,
-                    rgba(255,255,255,.07),
-                    transparent 35%
+                    rgba(255,255,255,0.08),
+                    transparent 40%
                 ),
                 #050505;
 
-            overflow:hidden;
+            overflow: hidden;
+
+            z-index: 9999;
         }
 
 
         /* =====================================================
-           02.04 BACKGROUND GLOW
-           Fungsi: Cahaya/glow di belakang logo
-        ===================================================== */
+           CSS 04 — BACKGROUND GLOW
+           Fungsi:
+           Membuat cahaya lembut di belakang logo.
+        ====================================================== */
 
-        .glow{
-            position:absolute;
+        .background-glow {
+            position: absolute;
 
-            width:500px;
-            height:500px;
+            width: 500px;
+            height: 500px;
 
-            border-radius:50%;
+            border-radius: 50%;
 
-            background:rgba(255,255,255,.05);
+            background: rgba(255,255,255,0.05);
 
-            filter:blur(100px);
+            filter: blur(100px);
 
-            animation:glow 3s infinite alternate;
+            animation: glowMove 3s ease-in-out infinite alternate;
         }
 
 
-        @keyframes glow{
+        @keyframes glowMove {
 
-            from{
-                transform:scale(.8);
-                opacity:.3;
+            from {
+                transform: scale(0.8);
+                opacity: 0.3;
             }
 
-            to{
-                transform:scale(1.2);
-                opacity:.7;
+            to {
+                transform: scale(1.2);
+                opacity: 0.8;
             }
 
         }
 
 
         /* =====================================================
-           02.05 BACKGROUND TEXT
+           CSS 05 — BACKGROUND TEXT
            Fungsi:
            Tulisan besar ASCEND dan AVENOX
-           yang berada di belakang konten utama
-        ===================================================== */
+           yang berada di belakang konten utama.
+        ====================================================== */
 
-        .bg-text{
-            position:absolute;
-            width:100%;
+        .background-text {
+            position: absolute;
 
-            display:flex;
-            flex-direction:column;
+            width: 100%;
 
-            gap:10px;
+            display: flex;
 
-            pointer-events:none;
-            user-select:none;
+            flex-direction: column;
+
+            gap: 10px;
+
+            pointer-events: none;
+
+            user-select: none;
         }
 
-        .bg-text span{
-            font-size:clamp(60px,13vw,180px);
 
-            font-weight:900;
-            letter-spacing:8px;
+        .background-text span {
 
-            line-height:.8;
-            text-align:center;
+            font-size: clamp(60px, 13vw, 180px);
 
-            color:transparent;
+            font-weight: 900;
+
+            letter-spacing: 8px;
+
+            line-height: 0.8;
+
+            text-align: center;
+
+            color: transparent;
 
             -webkit-text-stroke:
-                1px rgba(255,255,255,.12);
+                1px rgba(255,255,255,0.12);
 
-            white-space:nowrap;
+            white-space: nowrap;
 
             animation:
-                textMove 5s ease-in-out infinite alternate;
+                backgroundTextMove
+                5s
+                ease-in-out
+                infinite
+                alternate;
         }
 
 
-        .bg-text span:nth-child(2){
-            animation-delay:-2s;
+        .background-text span:nth-child(2) {
+
+            animation-delay: -2s;
+
         }
 
 
-        @keyframes textMove{
+        @keyframes backgroundTextMove {
 
-            from{
-                transform:translateX(-20px);
+            from {
+                transform: translateX(-20px);
             }
 
-            to{
-                transform:translateX(20px);
+            to {
+                transform: translateX(20px);
             }
 
         }
 
 
         /* =====================================================
-           02.06 CENTER CONTENT
+           CSS 06 — CENTER CONTENT
            Fungsi:
-           Mengatur semua isi yang berada di tengah
-        ===================================================== */
+           Mengatur semua konten yang berada di tengah.
+        ====================================================== */
 
-        .center{
-            position:relative;
-            z-index:5;
+        .center-content {
 
-            display:flex;
+            position: relative;
 
-            flex-direction:column;
+            z-index: 10;
 
-            align-items:center;
-            justify-content:center;
+            display: flex;
 
-            text-align:center;
+            flex-direction: column;
+
+            align-items: center;
+
+            justify-content: center;
+
+            text-align: center;
         }
 
 
         /* =====================================================
-           02.07 LOGO
+           CSS 07 — LOGO
            Fungsi:
-           Tempat logo utama
+           Tempat logo utama.
            
-           GANTI ANGKA "9" DI HTML
-           DENGAN LOGO LU NANTI
-        ===================================================== */
+           Sekarang masih menggunakan angka "9".
+           Nanti bisa diganti gambar/logo.
+        ====================================================== */
 
-        .logo{
-            width:110px;
-            height:110px;
+        .logo {
 
-            display:flex;
+            width: 110px;
+            height: 110px;
 
-            align-items:center;
-            justify-content:center;
+            display: flex;
 
-            border:1px solid rgba(255,255,255,.35);
+            align-items: center;
+            justify-content: center;
 
-            border-radius:50%;
+            border: 1px solid rgba(255,255,255,0.35);
 
-            font-size:30px;
-            font-weight:900;
+            border-radius: 50%;
+
+            font-size: 30px;
+
+            font-weight: 900;
 
             box-shadow:
-                0 0 30px rgba(255,255,255,.08),
-                inset 0 0 30px rgba(255,255,255,.04);
+                0 0 30px rgba(255,255,255,0.08),
+                inset 0 0 30px rgba(255,255,255,0.04);
 
             animation:
-                logoPulse 2s ease-in-out infinite;
+                logoPulse
+                2s
+                ease-in-out
+                infinite;
         }
 
 
-        @keyframes logoPulse{
+        @keyframes logoPulse {
 
-            0%,100%{
-                transform:scale(1);
+            0%,
+            100% {
+                transform: scale(1);
             }
 
-            50%{
-                transform:scale(1.05);
-            }
-
-        }
-
-
-        /* =====================================================
-           02.08 BRAND TITLE
-           Fungsi:
-           Tulisan ASCEND × AVENOX
-        ===================================================== */
-
-        .brand{
-            margin-top:28px;
-
-            font-size:clamp(28px,6vw,70px);
-
-            font-weight:900;
-
-            letter-spacing:8px;
-
-            text-transform:uppercase;
-        }
-
-
-        .brand span{
-            opacity:.45;
-        }
-
-
-        /* =====================================================
-           02.09 SUBTITLE
-           Fungsi:
-           Tulisan kecil di bawah nama event
-        ===================================================== */
-
-        .subtitle{
-            margin-top:8px;
-
-            font-size:12px;
-
-            letter-spacing:5px;
-
-            text-transform:uppercase;
-
-            color:rgba(255,255,255,.5);
-        }
-
-
-        /* =====================================================
-           02.10 LOADING BAR
-           Fungsi:
-           Area loading progress
-        ===================================================== */
-
-        .loader{
-            width:230px;
-
-            margin-top:40px;
-        }
-
-
-        /* =====================================================
-           02.11 LOADING INFORMATION
-           Fungsi:
-           Menampilkan "INITIALIZING" dan persentase
-        ===================================================== */
-
-        .loader-info{
-            display:flex;
-
-            justify-content:space-between;
-
-            font-size:10px;
-
-            letter-spacing:2px;
-
-            color:rgba(255,255,255,.5);
-
-            margin-bottom:8px;
-        }
-
-
-        /* =====================================================
-           02.12 PROGRESS BAR BACKGROUND
-        ===================================================== */
-
-        .bar{
-            width:100%;
-            height:2px;
-
-            background:rgba(255,255,255,.15);
-
-            overflow:hidden;
-        }
-
-
-        /* =====================================================
-           02.13 PROGRESS BAR
-           Fungsi:
-           Bagian yang bergerak dari 0% → 100%
-        ===================================================== */
-
-        .progress{
-            width:0%;
-            height:100%;
-
-            background:white;
-
-            box-shadow:0 0 15px white;
-
-            transition:width .2s linear;
-        }
-
-
-        /* =====================================================
-           02.14 BOTTOM TEXT
-           Fungsi:
-           Tulisan paling bawah loading screen
-        ===================================================== */
-
-        .bottom{
-            position:absolute;
-
-            bottom:25px;
-            left:0;
-
-            width:100%;
-
-            text-align:center;
-
-            font-size:9px;
-
-            letter-spacing:4px;
-
-            color:rgba(255,255,255,.3);
-        }
-
-
-        /* =====================================================
-           02.15 FADE OUT
-           Fungsi:
-           Animasi loading menghilang setelah selesai
-        ===================================================== */
-
-        .loading-screen.hide{
-            animation:fadeOut .8s forwards;
-        }
-
-
-        @keyframes fadeOut{
-
-            to{
-                opacity:0;
-                visibility:hidden;
+            50% {
+                transform: scale(1.05);
             }
 
         }
+
+
+        /* =====================================================
+           CSS 08 — EVENT TITLE
+           Fungsi:
+           Mengatur tulisan ASCEND × AVENOX.
+        ====================================================== */
+
+        .event-title {
+
+            margin-top: 28px;
+
+            font-size: clamp(28px, 6vw, 70px);
+
+            font-weight: 900;
+
+            letter-spacing: 8px;
+
+            text-transform: uppercase;
+        }
+
+
+        .event-title span {
+
+            opacity: 0.45;
+
+        }
+
+
+        /* =====================================================
+           CSS 09 — SUBTITLE
+           Fungsi:
+           Tulisan kecil di bawah nama event.
+        ====================================================== */
+
+        .subtitle {
+
+            margin-top: 8px;
+
+            font-size: 12px;
+
+            letter-spacing: 5px;
+
+            text-transform: uppercase;
+
+            color: rgba(255,255,255,0.5);
+        }
+
+
+        /* =====================================================
+           CSS 10 — LOADING CONTAINER
+           Fungsi:
+           Mengatur posisi dan ukuran loading bar.
+        ====================================================== */
+
+        .loading-container {
+
+            width: 230px;
+
+            margin-top: 40px;
+        }
+
+
+        /* =====================================================
+           CSS 11 — LOADING INFO
+           Fungsi:
+           Menampilkan INITIALIZING dan angka persen.
+        ====================================================== */
+
+        .loading-info {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-bottom: 8px;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            color: rgba(255,255,255,0.5);
+        }
+
+
+        /* =====================================================
+           CSS 12 — LOADING BAR BACKGROUND
+           Fungsi:
+           Background dari progress bar.
+        ====================================================== */
+
+        .loading-bar {
+
+            width: 100%;
+
+            height: 2px;
+
+            background: rgba(255,255,255,0.15);
+
+            overflow: hidden;
+        }
+
+
+        /* =====================================================
+           CSS 13 — PROGRESS
+           Fungsi:
+           Bagian bar yang bergerak 0% → 100%.
+        ====================================================== */
+
+        .loading-progress {
+
+            width: 0%;
+
+            height: 100%;
+
+            background: #ffffff;
+
+            box-shadow: 0 0 15px #ffffff;
+
+            transition: width 0.2s linear;
+        }
+
+
+        /* =====================================================
+           CSS 14 — FOOTER
+           Fungsi:
+           Tulisan paling bawah loading screen.
+        ====================================================== */
+
+        .footer-text {
+
+            position: absolute;
+
+            bottom: 25px;
+
+            left: 0;
+
+            width: 100%;
+
+            text-align: center;
+
+            font-size: 9px;
+
+            letter-spacing: 4px;
+
+            color: rgba(255,255,255,0.3);
+        }
+
+
+        /* =====================================================
+           CSS 15 — LOADING FADE OUT
+           Fungsi:
+           Animasi ketika loading selesai.
+        ====================================================== */
+
+        .loading-screen.hide {
+
+            animation:
+                loadingFadeOut
+                0.8s
+                forwards;
+        }
+
+
+        @keyframes loadingFadeOut {
+
+            to {
+
+                opacity: 0;
+
+                visibility: hidden;
+
+            }
+
+        }
+
 
     </style>
 
@@ -406,28 +465,39 @@
 
 
     <!-- =====================================================
-         03. LOADING SCREEN HTML
+         03. HTML — LOADING SCREEN
+         Semua struktur yang tampil di layar ada di sini.
+    ====================================================== -->
+
+
+    <!-- =====================================================
+         HTML 01 — CONTAINER UTAMA
          Fungsi:
-         Struktur yang tampil di layar
-    ===================================================== -->
+         Membungkus seluruh loading screen.
+    ====================================================== -->
 
-    <div class="loading-screen" id="loading">
-
-
-        <!-- =================================================
-             03.01 BACKGROUND GLOW
-        ================================================== -->
-
-        <div class="glow"></div>
+    <div
+        class="loading-screen"
+        id="loadingScreen"
+    >
 
 
         <!-- =================================================
-             03.02 BACKGROUND TEXT
+             HTML 02 — BACKGROUND GLOW
              Fungsi:
-             Tulisan besar di belakang
+             Cahaya di belakang logo.
         ================================================== -->
 
-        <div class="bg-text">
+        <div class="background-glow"></div>
+
+
+        <!-- =================================================
+             HTML 03 — BACKGROUND TEXT
+             Fungsi:
+             Tulisan besar di belakang.
+        ================================================== -->
+
+        <div class="background-text">
 
             <span>ASCEND</span>
 
@@ -437,34 +507,48 @@
 
 
         <!-- =================================================
-             03.03 CENTER CONTENT
+             HTML 04 — CENTER CONTENT
+             Fungsi:
+             Semua konten utama di tengah.
         ================================================== -->
 
-        <div class="center">
+        <div class="center-content">
 
 
             <!-- =============================================
-                 03.04 LOGO
+                 HTML 05 — LOGO
+                 Fungsi:
+                 Logo utama loading screen.
             ============================================== -->
 
             <div class="logo">
+
                 9
+
             </div>
 
 
             <!-- =============================================
-                 03.05 EVENT TITLE
+                 HTML 06 — EVENT TITLE
+                 Fungsi:
+                 Nama event.
             ============================================== -->
 
-            <div class="brand">
+            <div class="event-title">
 
-                ASCEND <span>×</span> AVENOX
+                ASCEND
+
+                <span>×</span>
+
+                AVENOX
 
             </div>
 
 
             <!-- =============================================
-                 03.06 SUBTITLE
+                 HTML 07 — SUBTITLE
+                 Fungsi:
+                 Deskripsi kecil event.
             ============================================== -->
 
             <div class="subtitle">
@@ -475,23 +559,23 @@
 
 
             <!-- =============================================
-                 03.07 LOADING
+                 HTML 08 — LOADING
             ============================================== -->
 
-            <div class="loader">
+            <div class="loading-container">
 
 
                 <!-- =========================================
-                     03.08 LOADING TEXT + PERCENT
+                     HTML 09 — LOADING INFO
                 ========================================== -->
 
-                <div class="loader-info">
+                <div class="loading-info">
 
                     <span>
                         INITIALIZING
                     </span>
 
-                    <span id="percent">
+                    <span id="loadingPercent">
                         0%
                     </span>
 
@@ -499,15 +583,15 @@
 
 
                 <!-- =========================================
-                     03.09 BAR
+                     HTML 10 — PROGRESS BAR
                 ========================================== -->
 
-                <div class="bar">
+                <div class="loading-bar">
 
                     <div
-                        class="progress"
-                        id="progress">
-                    </div>
+                        class="loading-progress"
+                        id="loadingProgress"
+                    ></div>
 
                 </div>
 
@@ -517,7 +601,120 @@
 
 
         <!-- =================================================
-             03.10 FOOTER
+             HTML 11 — FOOTER
+             Fungsi:
+             Tulisan bagian bawah.
         ================================================== -->
 
-        <div class="bottom
+        <div class="footer-text">
+
+            POWERED BY ASCEND × AVENOX
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         04. JAVASCRIPT
+         Semua fungsi loading screen ada di bawah.
+    ====================================================== -->
+
+    <script>
+
+
+        /* =====================================================
+           JS 01 — PROGRESS VARIABLE
+           Fungsi:
+           Menyimpan angka progress loading.
+        ====================================================== */
+
+        let progress = 0;
+
+
+        /* =====================================================
+           JS 02 — AMBIL ELEMENT HTML
+           Fungsi:
+           Menghubungkan JavaScript dengan HTML.
+        ====================================================== */
+
+        const loadingScreen =
+            document.getElementById("loadingScreen");
+
+        const loadingProgress =
+            document.getElementById("loadingProgress");
+
+        const loadingPercent =
+            document.getElementById("loadingPercent");
+
+
+        /* =====================================================
+           JS 03 — LOADING ENGINE
+           Fungsi:
+           Menjalankan loading dari 0 sampai 100%.
+        ====================================================== */
+
+        const loadingInterval = setInterval(() => {
+
+
+            /* =================================================
+               JS 04 — TAMBAH PROGRESS
+            ================================================== */
+
+            progress +=
+                Math.floor(Math.random() * 5) + 1;
+
+
+            /* =================================================
+               JS 05 — BATASI SAMPAI 100%
+            ================================================== */
+
+            if (progress >= 100) {
+
+                progress = 100;
+
+                clearInterval(loadingInterval);
+
+
+                /* =============================================
+                   JS 06 — SELESAI LOADING
+                   Fungsi:
+                   Menghilangkan loading screen.
+                ============================================== */
+
+                setTimeout(() => {
+
+                    loadingScreen.classList.add("hide");
+
+                }, 500);
+
+            }
+
+
+            /* =================================================
+               JS 07 — UPDATE PROGRESS BAR
+            ================================================== */
+
+            loadingProgress.style.width =
+                progress + "%";
+
+
+            /* =================================================
+               JS 08 — UPDATE ANGKA PERSEN
+            ================================================== */
+
+            loadingPercent.textContent =
+                progress + "%";
+
+
+        }, 100);
+
+
+    </script>
+
+
+</body>
+
+</html>
