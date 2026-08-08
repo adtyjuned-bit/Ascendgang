@@ -1,40 +1,523 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-    <!-- ========================================== -->
-    <!-- BAGIAN: CONFIG & META HEAD -->
-    <!-- ========================================== -->
+
+    <!-- =====================================================
+         01. META & PAGE SETTINGS
+         Fungsi:
+         - Mengatur viewport HP/PC
+         - Nama halaman
+         ===================================================== -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASCEND x AVENOX</title>
-    <!-- Menghubungkan file stylesheet CSS -->
-    <link rel="stylesheet" href="style.css">
+
+    <title>ASCEND × AVENOX</title>
+
+
+    <!-- =====================================================
+         02. CSS / DESIGN
+         Fungsi:
+         - Semua tampilan loading screen
+         - Background
+         - Logo
+         - Text
+         - Loading bar
+         - Animation
+         ===================================================== -->
+
+    <style>
+
+        /* =====================================================
+           02.01 RESET
+           Fungsi: Menghilangkan margin/padding bawaan browser
+        ===================================================== */
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+
+        /* =====================================================
+           02.02 BODY
+           Fungsi: Mengatur layar utama
+        ===================================================== */
+
+        body{
+            width:100%;
+            height:100vh;
+            overflow:hidden;
+            background:#050505;
+            color:white;
+            font-family:Arial, sans-serif;
+        }
+
+
+        /* =====================================================
+           02.03 LOADING SCREEN
+           Fungsi: Container utama seluruh loading screen
+        ===================================================== */
+
+        .loading-screen{
+            position:fixed;
+            inset:0;
+
+            display:flex;
+            align-items:center;
+            justify-content:center;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(255,255,255,.07),
+                    transparent 35%
+                ),
+                #050505;
+
+            overflow:hidden;
+        }
+
+
+        /* =====================================================
+           02.04 BACKGROUND GLOW
+           Fungsi: Cahaya/glow di belakang logo
+        ===================================================== */
+
+        .glow{
+            position:absolute;
+
+            width:500px;
+            height:500px;
+
+            border-radius:50%;
+
+            background:rgba(255,255,255,.05);
+
+            filter:blur(100px);
+
+            animation:glow 3s infinite alternate;
+        }
+
+
+        @keyframes glow{
+
+            from{
+                transform:scale(.8);
+                opacity:.3;
+            }
+
+            to{
+                transform:scale(1.2);
+                opacity:.7;
+            }
+
+        }
+
+
+        /* =====================================================
+           02.05 BACKGROUND TEXT
+           Fungsi:
+           Tulisan besar ASCEND dan AVENOX
+           yang berada di belakang konten utama
+        ===================================================== */
+
+        .bg-text{
+            position:absolute;
+            width:100%;
+
+            display:flex;
+            flex-direction:column;
+
+            gap:10px;
+
+            pointer-events:none;
+            user-select:none;
+        }
+
+        .bg-text span{
+            font-size:clamp(60px,13vw,180px);
+
+            font-weight:900;
+            letter-spacing:8px;
+
+            line-height:.8;
+            text-align:center;
+
+            color:transparent;
+
+            -webkit-text-stroke:
+                1px rgba(255,255,255,.12);
+
+            white-space:nowrap;
+
+            animation:
+                textMove 5s ease-in-out infinite alternate;
+        }
+
+
+        .bg-text span:nth-child(2){
+            animation-delay:-2s;
+        }
+
+
+        @keyframes textMove{
+
+            from{
+                transform:translateX(-20px);
+            }
+
+            to{
+                transform:translateX(20px);
+            }
+
+        }
+
+
+        /* =====================================================
+           02.06 CENTER CONTENT
+           Fungsi:
+           Mengatur semua isi yang berada di tengah
+        ===================================================== */
+
+        .center{
+            position:relative;
+            z-index:5;
+
+            display:flex;
+
+            flex-direction:column;
+
+            align-items:center;
+            justify-content:center;
+
+            text-align:center;
+        }
+
+
+        /* =====================================================
+           02.07 LOGO
+           Fungsi:
+           Tempat logo utama
+           
+           GANTI ANGKA "9" DI HTML
+           DENGAN LOGO LU NANTI
+        ===================================================== */
+
+        .logo{
+            width:110px;
+            height:110px;
+
+            display:flex;
+
+            align-items:center;
+            justify-content:center;
+
+            border:1px solid rgba(255,255,255,.35);
+
+            border-radius:50%;
+
+            font-size:30px;
+            font-weight:900;
+
+            box-shadow:
+                0 0 30px rgba(255,255,255,.08),
+                inset 0 0 30px rgba(255,255,255,.04);
+
+            animation:
+                logoPulse 2s ease-in-out infinite;
+        }
+
+
+        @keyframes logoPulse{
+
+            0%,100%{
+                transform:scale(1);
+            }
+
+            50%{
+                transform:scale(1.05);
+            }
+
+        }
+
+
+        /* =====================================================
+           02.08 BRAND TITLE
+           Fungsi:
+           Tulisan ASCEND × AVENOX
+        ===================================================== */
+
+        .brand{
+            margin-top:28px;
+
+            font-size:clamp(28px,6vw,70px);
+
+            font-weight:900;
+
+            letter-spacing:8px;
+
+            text-transform:uppercase;
+        }
+
+
+        .brand span{
+            opacity:.45;
+        }
+
+
+        /* =====================================================
+           02.09 SUBTITLE
+           Fungsi:
+           Tulisan kecil di bawah nama event
+        ===================================================== */
+
+        .subtitle{
+            margin-top:8px;
+
+            font-size:12px;
+
+            letter-spacing:5px;
+
+            text-transform:uppercase;
+
+            color:rgba(255,255,255,.5);
+        }
+
+
+        /* =====================================================
+           02.10 LOADING BAR
+           Fungsi:
+           Area loading progress
+        ===================================================== */
+
+        .loader{
+            width:230px;
+
+            margin-top:40px;
+        }
+
+
+        /* =====================================================
+           02.11 LOADING INFORMATION
+           Fungsi:
+           Menampilkan "INITIALIZING" dan persentase
+        ===================================================== */
+
+        .loader-info{
+            display:flex;
+
+            justify-content:space-between;
+
+            font-size:10px;
+
+            letter-spacing:2px;
+
+            color:rgba(255,255,255,.5);
+
+            margin-bottom:8px;
+        }
+
+
+        /* =====================================================
+           02.12 PROGRESS BAR BACKGROUND
+        ===================================================== */
+
+        .bar{
+            width:100%;
+            height:2px;
+
+            background:rgba(255,255,255,.15);
+
+            overflow:hidden;
+        }
+
+
+        /* =====================================================
+           02.13 PROGRESS BAR
+           Fungsi:
+           Bagian yang bergerak dari 0% → 100%
+        ===================================================== */
+
+        .progress{
+            width:0%;
+            height:100%;
+
+            background:white;
+
+            box-shadow:0 0 15px white;
+
+            transition:width .2s linear;
+        }
+
+
+        /* =====================================================
+           02.14 BOTTOM TEXT
+           Fungsi:
+           Tulisan paling bawah loading screen
+        ===================================================== */
+
+        .bottom{
+            position:absolute;
+
+            bottom:25px;
+            left:0;
+
+            width:100%;
+
+            text-align:center;
+
+            font-size:9px;
+
+            letter-spacing:4px;
+
+            color:rgba(255,255,255,.3);
+        }
+
+
+        /* =====================================================
+           02.15 FADE OUT
+           Fungsi:
+           Animasi loading menghilang setelah selesai
+        ===================================================== */
+
+        .loading-screen.hide{
+            animation:fadeOut .8s forwards;
+        }
+
+
+        @keyframes fadeOut{
+
+            to{
+                opacity:0;
+                visibility:hidden;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
 
-    <!-- ========================================== -->
-    <!-- BAGIAN: LOADING SCREEN (Efek Glitch Bergantian) -->
-    <!-- ========================================== -->
-    <div id="loading-screen">
-        <div class="glitch-wrapper">
-            <!-- Teks yang akan berubah dinamis lewat JS: ASCEND -> X -> AVENOX -->
-            <h1 class="glitch-text" id="loading-text">ASCEND</h1>
+
+    <!-- =====================================================
+         03. LOADING SCREEN HTML
+         Fungsi:
+         Struktur yang tampil di layar
+    ===================================================== -->
+
+    <div class="loading-screen" id="loading">
+
+
+        <!-- =================================================
+             03.01 BACKGROUND GLOW
+        ================================================== -->
+
+        <div class="glow"></div>
+
+
+        <!-- =================================================
+             03.02 BACKGROUND TEXT
+             Fungsi:
+             Tulisan besar di belakang
+        ================================================== -->
+
+        <div class="bg-text">
+
+            <span>ASCEND</span>
+
+            <span>AVENOX</span>
+
         </div>
-    </div>
 
-    <!-- ========================================== -->
-    <!-- BAGIAN: MAIN CONTENT (Isi Utama Website) -->
-    <!-- ========================================== -->
-    <div id="main-content">
-        <h1>Welcome to ASCEND X AVENOX</h1>
-        <p>Tournament site ready.</p>
-    </div>
 
-    <!-- ========================================== -->
-    <!-- BAGIAN: SCRIPT JS -->
-    <!-- ========================================== -->
-    <!-- Menghubungkan file logika JavaScript -->
-    <script src="script.js"></script>
-</body>
-</html>
+        <!-- =================================================
+             03.03 CENTER CONTENT
+        ================================================== -->
 
+        <div class="center">
+
+
+            <!-- =============================================
+                 03.04 LOGO
+            ============================================== -->
+
+            <div class="logo">
+                9
+            </div>
+
+
+            <!-- =============================================
+                 03.05 EVENT TITLE
+            ============================================== -->
+
+            <div class="brand">
+
+                ASCEND <span>×</span> AVENOX
+
+            </div>
+
+
+            <!-- =============================================
+                 03.06 SUBTITLE
+            ============================================== -->
+
+            <div class="subtitle">
+
+                Championship Experience
+
+            </div>
+
+
+            <!-- =============================================
+                 03.07 LOADING
+            ============================================== -->
+
+            <div class="loader">
+
+
+                <!-- =========================================
+                     03.08 LOADING TEXT + PERCENT
+                ========================================== -->
+
+                <div class="loader-info">
+
+                    <span>
+                        INITIALIZING
+                    </span>
+
+                    <span id="percent">
+                        0%
+                    </span>
+
+                </div>
+
+
+                <!-- =========================================
+                     03.09 BAR
+                ========================================== -->
+
+                <div class="bar">
+
+                    <div
+                        class="progress"
+                        id="progress">
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             03.10 FOOTER
+        ================================================== -->
+
+        <div class="bottom
