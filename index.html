@@ -617,102 +617,106 @@
 
 
 
-    <!-- =====================================================
-         04. JAVASCRIPT
-         Semua fungsi loading screen ada di bawah.
-    ====================================================== -->
+    
 
-    <script>
+    /* =====================================================
+       04. JAVASCRIPT — LOADING SYSTEM
+    ====================================================== */
+<script>
+
+    /* =====================================================
+       JS 01 — PROGRESS
+       Fungsi:
+       Menyimpan nilai progress dari 0 sampai 100.
+    ====================================================== */
+
+    let progress = 0;
 
 
-        /* =====================================================
-           JS 01 — PROGRESS VARIABLE
+    /* =====================================================
+       JS 02 — AMBIL ELEMENT
+    ====================================================== */
+
+    const loadingScreen =
+        document.getElementById("loadingScreen");
+
+    const loadingProgress =
+        document.getElementById("loadingProgress");
+
+    const loadingPercent =
+        document.getElementById("loadingPercent");
+
+
+    /* =====================================================
+       JS 03 — LOADING ENGINE
+       Fungsi:
+       Progress berjalan dari 0 → 100.
+    ====================================================== */
+
+    const loadingInterval = setInterval(() => {
+
+        progress += 1;
+
+
+        /* =================================================
+           JS 04 — UPDATE PROGRESS BAR
+        ================================================== */
+
+        loadingProgress.style.width =
+            progress + "%";
+
+
+        /* =================================================
+           JS 05 — COUNTDOWN 10 → 0
            Fungsi:
-           Menyimpan angka progress loading.
-        ====================================================== */
+           Mengubah 100% menjadi angka 10 → 0.
+           
+           100% = 0
+           90%  = 1
+           80%  = 2
+           ...
+           10%  = 9
+           0%   = 10
+        ================================================== */
 
-        let progress = 0;
-
-
-        /* =====================================================
-           JS 02 — AMBIL ELEMENT HTML
-           Fungsi:
-           Menghubungkan JavaScript dengan HTML.
-        ====================================================== */
-
-        const loadingScreen =
-            document.getElementById("loadingScreen");
-
-        const loadingProgress =
-            document.getElementById("loadingProgress");
-
-        const loadingPercent =
-            document.getElementById("loadingPercent");
+        const countdown =
+            Math.ceil((100 - progress) / 10);
 
 
-        /* =====================================================
-           JS 03 — LOADING ENGINE
-           Fungsi:
-           Menjalankan loading dari 0 sampai 100%.
-        ====================================================== */
+        /* =================================================
+           JS 06 — UPDATE ANGKA
+        ================================================== */
 
-        const loadingInterval = setInterval(() => {
-
-
-            /* =================================================
-               JS 04 — TAMBAH PROGRESS
-            ================================================== */
-
-            progress +=
-                Math.floor(Math.random() * 5) + 1;
+        loadingPercent.textContent =
+            countdown;
 
 
-            /* =================================================
-               JS 05 — BATASI SAMPAI 100%
-            ================================================== */
+        /* =================================================
+           JS 07 — JIKA LOADING SELESAI
+        ================================================== */
 
-            if (progress >= 100) {
+        if (progress >= 100) {
 
-                progress = 100;
+            clearInterval(loadingInterval);
 
-                clearInterval(loadingInterval);
-
-
-                /* =============================================
-                   JS 06 — SELESAI LOADING
-                   Fungsi:
-                   Menghilangkan loading screen.
-                ============================================== */
-
-                setTimeout(() => {
-
-                    loadingScreen.classList.add("hide");
-
-                }, 500);
-
-            }
+            loadingPercent.textContent = "0";
 
 
-            /* =================================================
-               JS 07 — UPDATE PROGRESS BAR
-            ================================================== */
+            /* =============================================
+               JS 08 — FADE OUT
+            ============================================== */
 
-            loadingProgress.style.width =
-                progress + "%";
+            setTimeout(() => {
 
+                loadingScreen.classList.add("hide");
 
-            /* =================================================
-               JS 08 — UPDATE ANGKA PERSEN
-            ================================================== */
+            }, 500);
 
-            loadingPercent.textContent =
-                progress + "%";
+        }
 
+    }, 50);
 
-        }, 100);
-
-
-    </script>
+</script>
 
 
 </body>
