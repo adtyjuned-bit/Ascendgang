@@ -269,21 +269,47 @@
         opacity 0.2s ease;
 }
 
-
 /* =====================================================
-   CSS 07.01 — COUNTDOWN CHANGE
+   CSS 07 — BIG COUNTDOWN
    Fungsi:
-   Efek ketika angka berubah.
+   Angka besar di tengah yang bergerak 9 → 0.
 ===================================================== */
 
-.logo.countdown-change {
+.logo {
+    width: 150px;
+    height: 150px;
 
-    transform: scale(1.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+
+    font-size: 80px;
+    font-weight: 900;
+
+    color: white;
+
+    text-shadow:
+        0 0 20px rgba(255,255,255,0.4),
+        0 0 50px rgba(255,255,255,0.2);
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+
+/* Efek setiap angka berubah */
+
+.logo.change {
+    transform: scale(1.2);
     opacity: 0.5;
+}
 
     
-}================================================
+       /*================================================
            CSS 08 — EVENT TITLE
            Fungsi:
            Mengatur tulisan ASCEND × AVENOX.
@@ -517,16 +543,45 @@
         <div class="center-content">
 
 
-            <!-- =====================================================
-     HTML 05 — BIG COUNTDOWN
-     Fungsi:
-     Angka besar yang mengikuti loading.
-====================================================== -->
+            /* =====================================================
+   CSS 07 — BIG COUNTDOWN
+   Fungsi:
+   Angka besar di tengah yang bergerak 9 → 0.
+===================================================== */
 
-<div class="logo" id="bigCountdown">
-    9
-</div>
+.logo {
+    width: 150px;
+    height: 150px;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+
+    font-size: 80px;
+    font-weight: 900;
+
+    color: white;
+
+    text-shadow:
+        0 0 20px rgba(255,255,255,0.4),
+        0 0 50px rgba(255,255,255,0.2);
+
+    transition:
+        transform 0.25s ease,
+        opacity 0.25s ease;
+}
+
+
+/* Efek setiap angka berubah */
+
+.logo.change {
+    transform: scale(1.2);
+    opacity: 0.5;
+}
+            
             <!-- =============================================
                  HTML 06 — EVENT TITLE
                  Fungsi:
@@ -616,116 +671,142 @@
 
 
 
-    <script>
 
-    /* =====================================================
-       04. JAVASCRIPT — LOADING SYSTEM
-    ====================================================== */
+<script>
 
-    /* =====================================================
-       JS 01 — PROGRESS
-       Fungsi:
-       Menyimpan nilai progress dari 0 sampai 100.
-    ====================================================== */
-
-    let progress = 0;
-
-
-    /* =====================================================
-       JS 02 — AMBIL ELEMENT
-    ====================================================== */
-
-    const loadingScreen =
-        document.getElementById("loadingScreen");
-
-    const loadingProgress =
-        document.getElementById("loadingProgress");
-
-    const loadingPercent =
-        document.getElementById("loadingPercent");
-
-
-    /* =====================================================
-       JS 03 — LOADING ENGINE
-       Fungsi:
-       Progress berjalan dari 0 → 100.
-    ====================================================== */
-
-    const loadingInterval = setInterval(() => {
-
-        progress += 1;
-
-
-        /* =================================================
-           JS 04 — UPDATE PROGRESS BAR
-        ================================================== */
-
-        loadingProgress.style.width =
-            progress + "%";
-
-
-        /* =================================================
-           JS 05 — COUNTDOWN 10 → 0
-           Fungsi:
-           Mengubah 100% menjadi angka 10 → 0.
-           
-           100% = 0
-           90%  = 1
-           80%  = 2
-           ...
-           10%  = 9
-           0%   = 10
-        ================================================== */
-
-        const countdown =
-            Math.ceil((100 - progress) / 10);
-
-
-        /* =================================================
-           JS 06 — UPDATE ANGKA
-        ================================================== */
-
-        loadingPercent.textContent =
-            countdown;
-
-
-        /* =================================================
-           JS 07 — JIKA LOADING SELESAI
-        ================================================== */
-
-        if (progress >= 100) {
-
-            clearInterval(loadingInterval);
-
-            loadingPercent.textContent = "0";
-
-
-            /* =============================================
-               JS 08 — FADE OUT
-            ============================================== */
-
-            setTimeout(() => {
-
-                loadingScreen.classList.add("hide");
-
-            }, 500);
-
-        }
-
-    }, 50);
-
-
-
-        /* =====================================================
-   JS 02.01 — BIG COUNTDOWN
-   Fungsi:
-   Menghubungkan angka besar dengan progress loading.
+/* =====================================================
+   04. JAVASCRIPT — LOADING SYSTEM
 ===================================================== */
+
+
+/* =====================================================
+   JS 01 — ELEMENT
+===================================================== */
+
+const loadingScreen =
+    document.getElementById("loadingScreen");
+
+const loadingProgress =
+    document.getElementById("loadingProgress");
+
+const loadingPercent =
+    document.getElementById("loadingPercent");
 
 const bigCountdown =
     document.getElementById("bigCountdown");
 
+
+/* =====================================================
+   JS 02 — VARIABLE
+===================================================== */
+
+let progress = 0;
+
+
+/* =====================================================
+   JS 03 — START LOADING
+===================================================== */
+
+const loadingInterval = setInterval(() => {
+
+
+    /* =================================================
+       Tambahkan progress
+    ================================================== */
+
+    progress++;
+
+
+    /* =================================================
+       UPDATE PROGRESS BAR
+    ================================================== */
+
+    loadingProgress.style.width =
+        progress + "%";
+
+
+    /* =================================================
+       HITUNG COUNTDOWN
+
+       0%   = 9
+       10%  = 8
+       20%  = 7
+       30%  = 6
+       40%  = 5
+       50%  = 4
+       60%  = 3
+       70%  = 2
+       80%  = 1
+       90%+ = 0
+    ================================================== */
+
+    const number =
+        Math.max(
+            0,
+            9 - Math.floor(progress / 10)
+        );
+
+
+    /* =================================================
+       UPDATE ANGKA BESAR
+    ================================================== */
+
+    bigCountdown.textContent =
+        number;
+
+
+    /* =================================================
+       ANIMASI ANGKA
+    ================================================== */
+
+    bigCountdown.classList.remove("change");
+
+    void bigCountdown.offsetWidth;
+
+    bigCountdown.classList.add("change");
+
+
+    /* =================================================
+       ANGKA KECIL
+       Kalau lu masih punya angka persen,
+       ini tetap menunjukkan progress.
+    ================================================== */
+
+    loadingPercent.textContent =
+        progress + "%";
+
+
+    /* =================================================
+       LOADING SELESAI
+    ================================================== */
+
+    if (progress >= 100) {
+
+        clearInterval(loadingInterval);
+
+        bigCountdown.textContent = "0";
+
+        loadingPercent.textContent = "100%";
+
+
+        /* =============================================
+           Tunggu sebentar
+        ============================================== */
+
+        setTimeout(() => {
+
+            loadingScreen.classList.add("hide");
+
+        }, 700);
+
+    }
+
+
+}, 50);
+
 </script>
+    
+
 
 
 </body>
