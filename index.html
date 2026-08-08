@@ -723,15 +723,16 @@ const loadingInterval = setInterval(() => {
 
         setTimeout(() => {
 
-            loadingScreen.classList.add("hide");
+    loadingScreen.classList.add("hide");
 
-        }, 700);
+    setTimeout(() => {
 
-    }
+        window.location.href = "dashboard.html";
 
+    }, 800);
 
-}, 50);
-
+}, 500);
+        
 </script>
     
 
